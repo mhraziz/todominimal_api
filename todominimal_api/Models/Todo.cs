@@ -7,9 +7,9 @@ public partial class Todo
 {
     public int Id { get; set; }
 
-    public string Todo1 { get; set; } = null!;
+    public string? Todo1 { get; set; }
 
-    public string Completed { get; set; } = null!;
+    public string? Completed { get; set; }
 
-    public int UserId { get; set; }
+    //public int UserId { get; set; }
 }

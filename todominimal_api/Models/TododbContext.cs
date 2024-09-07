@@ -30,7 +30,7 @@ public partial class TododbContext : DbContext
             entity.ToTable("todo");
 
             entity.Property(e => e.Id)
-                .ValueGeneratedNever()
+                //.ValueGeneratedNever()
                 .HasColumnName("id");
             entity.Property(e => e.Completed)
                 .HasMaxLength(255)
@@ -40,7 +40,7 @@ public partial class TododbContext : DbContext
                 .HasMaxLength(255)
                 .IsUnicode(false)
                 .HasColumnName("todo");
-            entity.Property(e => e.UserId).HasColumnName("userId");
+            //entity.Property(e => e.UserId).HasColumnName("userId");
         });
 
         OnModelCreatingPartial(modelBuilder);

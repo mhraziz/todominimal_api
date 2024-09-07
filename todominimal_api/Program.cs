@@ -20,6 +20,17 @@ namespace todominimal_api
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", builder =>
+                {
+                    builder
+                        .AllowAnyOrigin()    // Allow any origin
+                        .AllowAnyMethod()    // Allow any HTTP method
+                        .AllowAnyHeader();   // Allow any header
+                });
+            });
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -30,6 +41,7 @@ namespace todominimal_api
             }
 
             app.UseHttpsRedirection();
+            app.UseCors("AllowAll");
 
             //Get all Todos.......
             app.MapGet("/todominimal_api/Todos", (TododbContext db) =>
@@ -56,7 +68,7 @@ namespace todominimal_api
                var todo=db.Todos.FirstOrDefault(x => x.Id == tod.Id);
                 todo.Todo1 = tod.Todo1;
                 todo.Completed = tod.Completed;
-                todo.UserId = tod.UserId;
+               // todo.UserId = tod.UserId;
                 db.Todos.Update(todo);
                 db.SaveChanges();
                 return Results.NoContent();
